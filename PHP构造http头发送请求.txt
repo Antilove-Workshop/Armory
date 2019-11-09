@@ -1,0 +1,75 @@
+============================================
+
+ 本文来自夜寞网盘 www.201262454.cccpan.com
+
+  登录密码为 201262454  也就是客服QQ号码 
+
+         客服QQ  201262454
+
+       集大量黑客软件一身的网盘
+
+   渗透工具 抓鸡 远控 DDOS 等等软件
+
+============================================
+
+    
+
+http头部的格式和参数说明
+
+ php发送http请求的最关键点在于构造一个符合http协议的头部，http请求的信息一般以下几个方面构成
+
+(1)http method:一般有post, get这两种
+
+(2)request url:http所请求的资源
+
+(3)http version:用哪一个http版本协议，常见的有HTTP/1.1 和HTTP/1.0
+
+(4)Host:请求的主机名称
+
+(5)User-Agent:用户代理类别,一般是浏览器名称，如firefox的User-Agent:Mozilla/5.0 (X11; U; Linux i686; en-GB; rv:1.9.2.15) Gecko/20110303 Ubuntu/10.04 (luci    d) Firefox/3.6.15一般从User-Agent中可以知道用户用的是什么类型的浏览器和操作系统，以级他们的版本
+
+(6)Accept:为客户端可以接受的媒体类型，常见的有text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+
+(7)Accept-Language:可以接受的语言类型,如en-gb,en;q=0.5
+
+(8)Accept-Encoding:可以接受的编码类型,如gzip,deflate,可以接受压缩
+
+(9)Accept-Charset:可以接受的字体编码，如ISO-8859-1,utf-8;q=0.7,*;q=0.7
+
+(10)Content-Type:内容传送的类型，如application/x-www-form-urlencoded,如普通的form提交方式
+
+(11)Cookie:要传送到服务器上的cookie数据,如AJSTAT_ok_times=2; SESS_ID=c8c293c948c233a9a89aa11fb08c61af5f29c7ef; AJSTAT_ok_pages=2
+
+(12)Content-Length:除了头部，传送内容的长度。
+
+(13)Referer:也就是先前访问的页面.
+
+Content-Type常见有如下类型，因为content-Type和数据传送的格式有很大的关系，所以这里详细说明数据提交的类型关于application/x-www-form-urlencoded等字符编码的解释说明在Form元素的语法中，EncType表明提交数据的格式 用 Enctype 属性指定将数据回发到服务器时浏览器使用的编码类型。下边是说明： application/x-www-form-urlencoded： 窗体数据被编码为名称/值对。这是标准的编码格式。 multipart/form-data： 窗体数据被编码为一条消息，页上的每个控件对应消息中的一个部分。 text/plain： 窗体数据以纯文本形式进行编码，其中不含任何控件或格式字符。   form的enctype属性为编码方式， 常用有两种：application/x-www-form-urlencoded和multipart/form-data， 默认为application/x-www-form-urlencoded。 当action为get时候，浏览器用x-www-form-urlencoded的编码方式把form数据转换成一个字串（name1=value1&name2=value2...), 然后把这个字串append到url后面，用?分割，加载这个新的url。 当action为post时候，浏览器把form数据封装到http body中，然后发送到server。 如果没有type=file的控件，用默认的application/x-www-form-urlencoded就可以了。 但是如果有type=file的话，就要用到multipart/form-data了。 浏览器会把整个表单以控件为单位分割，并为每个部分加上Content-Disposition(form-data或者file),  Content-Type(默认为text/plain),name(控件name)等信息，并加上分割符(boundary)。php构造http请求if(empty($_REQUEST['email']))
+{
+$fp = fsockopen("www1.header.com", 80, $errno, $errstr, 30);
+if (!$fp) {
+echo "$errstr ($errno)
+/n";
+} else {
+$out = "POST /index.php HTTP/1.1/r/n";
+$out .= "Host: www1.header.com/r/n";
+$out .= "User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-GB; rv:1.9.2.15) Gecko/20110303 Ubuntu/10.04 (lucid) Firefox/3.6.15/r/n";
+$out .= "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8/r/n";
+$out .= "Accept-Language: en-gb,en;q=0.5/r/n";
+$out .= "Accept-Encoding: gzip,deflate/r/n";
+$out .= "Content-Type: application/x-www-form-urlencoded/r/n";
+$out .= "Content-Length: 80/r/n";
+$out .= "Connection: Close/r/n/r/n";
+$out .= "email=youname%40gmail.com&password=youpasswd&act=login&redirectURL=&loginsubmit=/r/n/r/n";
+fwrite($fp, $out);
+while (!feof($fp)) {
+echo fgets($fp, 128);
+}
+fclose($fp);
+}
+}
+else
+{
+print_r($_REQUEST);
+}
+?>用php发送http请求的主要分两部(1)构造一个http头部的串.(2)用fsockopen打开socket连接。(3)再用fwrite把构造好的数据传送到请求主机

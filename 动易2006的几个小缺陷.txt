@@ -1,0 +1,79 @@
+============================================
+
+ 本文来自夜寞网盘 www.201262454.cccpan.com
+
+  登录密码为 201262454  也就是客服QQ号码 
+
+         客服QQ  201262454
+
+       集大量黑客软件一身的网盘
+
+   渗透工具 抓鸡 远控 DDOS 等等软件
+
+============================================
+ 
+动易2006的几个小缺陷
+
+文章作者：落叶纷飞[JJSEX]
+信息来源：http://hi.baidu.com/jluoye
+
+
+现在人家动易公司都把动易内容管理系统开源了，哎~~
+
+不过用动易2006的人还是很多，我手上的SWI 0day几乎没用过，这点足以证明
+
+好了不废话，说几个小缺陷而已，给各位入侵提供点捷径
+
+首先说说怎么判断一个站点是不是动易，这点其实很简单，因为动易有一个它标志性的文件——region.asp
+
+只要你打开一个站点的时候看看region.asp文件存不存在就知道是不是动易系统了
+
+一般来说都是的，这个文件的名字我只在动易系统里见过
+
+如何判断版本呢？直接访问根目录下的Dyna_Page.asp文件，就能看到版本信息了
+
+众所周知动易有更改后台的功能，那么能不能直接找到后台呢？我们来看看region.aso的一句代码：
+
+............
+
+<link href="<%=AdminDir%>/Admin_Style.css" rel="stylesheet" type="text/css">
+
+............
+
+admindir变量是后台目录，所以只要我们打开region.asp文件查看一下源代码就能看到后台的目录了
+
+还有一处是reg/User_RegCheck.asp文件，我们看看它的一段代码：
+
+..........................................
+
+<!--#include file="../Inc/function.asp"-->
+
+..........................................
+
+这个文件包含了inc/function.asp文件，我们看看其中的代码：
+
+..................................................................................................
+
+Sub WriteErrMsg(sErrMsg, sComeUrl)
+    Dim strErr
+    strErr = strErr & "<html><head><title>错误信息</title><meta http-equiv='Content-Type' content='text/html; charset=gb2312'>" & vbCrLf
+    strErr = strErr & "<link href='" & strInstallDir & AdminDir & "/Admin_Style.css' rel='stylesheet' type='text/css'></head><body><br><br>" & vbCrLf
+
+..................................................................................................
+
+Sub WriteSuccessMsg(sSuccessMsg, sComeUrl)
+    Dim strSuccess
+    strSuccess = strSuccess & "<html><head><title>成功信息</title><meta http-equiv='Content-Type' content='text/html; charset=gb2312'>" & vbCrLf
+    strSuccess = strSuccess & "<link href='" & strInstallDir & AdminDir & "/Admin_Style.css' rel='stylesheet' type='text/css'></head><body><br><br>" & vbCrLf
+
+..................................................................................................
+
+无论成功与否都会调用admindir变量，所以只要我们打开reg/User_RegCheck.asp文件，查看一下源代码
+
+就能看到管理员登陆的目录了，我用这个方法找到了“中国X黑客小组”的后台地址：
+
+http://www.cnxhacker.com/xadmin/admin_login.asp
+
+region.asp文件找后台目录的方法很早就公布了，不过原理并未有人分析过
+
+这里我只是分析下原理，抛砖引玉、思维扩展。
