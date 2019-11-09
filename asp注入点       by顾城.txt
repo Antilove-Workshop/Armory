@@ -1,0 +1,18 @@
+顾城q:256314671   出批量扫权重网站，注入漏洞软件。
+http://www.zjhxky.com/products.asp?titleid=24
+http://www.xxstgs.com/about.asp?id=17
+http://www.sqjob.cn/shengxinwen3.asp?idi=21822&daima=ningxia
+http://www.gzjjqx.com/yinshuius.asp?id=125
+http://www.bjssjc.com/gkpx_jt.asp?id=35
+http://www.bjyxwhysxx.com/proshow.asp?id=174&big=40
+http://www.shi-hui.cn/index.asp?b_id=19
+http://www.yltn.com/webinfo.asp?id=205
+http://www.njyafeng.com/info.asp?pathstr=440
+http://www.yltn.com/webinfo.asp?id=85
+http://www.boomaxinternational.com/news_detail.asp?id=38
+http://www.njxinbell.com/xbedetailpro.php?id=1
+http://bbs.jjwxc.com/bindex.php?class=1
+http://3g.gaotie.cn/Show.php?ID=515632
+http://www.boomaxinternational.com/news_detail.asp?id=38
+http://www.njyafeng.com/info.asp?pathstr=440
+http://cn.51tie.com/api/oauth/'+oauth_site+'/index.php?time=1571289488
